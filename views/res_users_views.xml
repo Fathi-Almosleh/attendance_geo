@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_attendance_work_locations" model="ir.ui.view">
+        <field name="name">res.users.form.attendance.work.locations</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Attendance Locations">
+                    <group>
+                        <field name="work_location_ids" widget="many2many_tags"
+                               options="{'no_create_edit': False}"/>
+                        <label class="o_form_label"
+                               string="If you add locations here, the user can check-in/out only داخل دائرة أحد هذه المواقع."/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_attendance_work_location_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.work.location.tree</field>
+        <field name="model">hr.attendance.work.location</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
+                <field name="radius_m"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_attendance_work_location_form" model="ir.ui.view">
+        <field name="name">hr.attendance.work.location.form</field>
+        <field name="model">hr.attendance.work.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Coordinates">
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                        <field name="radius_m"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_attendance_work_location" model="ir.actions.act_window">
+        <field name="name">Attendance Work Locations</field>
+        <field name="res_model">hr.attendance.work.location</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_hr_attendance_work_location_root"
+              name="Attendance Locations"
+              parent="hr_attendance.menu_hr_attendance_root"
+              action="action_hr_attendance_work_location"
+              sequence="60"/>
+</odoo>

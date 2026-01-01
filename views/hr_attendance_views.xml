@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view -->
+    <record id="hr_attendance_view_tree_gps_note" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.gps.note</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='check_in']" position="after">
+                <field name="checkin_latitude" optional="hide"/>
+                <field name="checkin_longitude" optional="hide"/>
+                <field name="checkin_url" widget="url" optional="hide"/>
+                <field name="checkin_note" optional="hide"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='check_out']" position="after">
+                <field name="checkout_latitude" optional="hide"/>
+                <field name="checkout_longitude" optional="hide"/>
+                <field name="checkout_url" widget="url" optional="hide"/>
+                <field name="checkout_note" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="hr_attendance_view_form_gps_note" model="ir.ui.view">
+        <field name="name">hr.attendance.form.gps.note</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+                <group string="GPS / Notes" colspan="2">
+                    <group>
+                        <field name="checkin_latitude" readonly="1"/>
+                        <field name="checkin_longitude" readonly="1"/>
+                        <field name="checkin_url" widget="url" readonly="1"/>
+                        <field name="checkin_note" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="checkout_latitude" readonly="1"/>
+                        <field name="checkout_longitude" readonly="1"/>
+                        <field name="checkout_url" widget="url" readonly="1"/>
+                        <field name="checkout_note" readonly="1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
